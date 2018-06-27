@@ -773,7 +773,7 @@ export default class Editor {
         let range = this.getSelectionRange();
         return (
             range &&
-            ContentTraverser.createSelectionBlockTraverser(this.core.contentDiv, range, startFrom)
+            ContentTraverser.createBlockTraverser(this.core.contentDiv, range, startFrom)
         );
     }
 
