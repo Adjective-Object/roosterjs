@@ -21,6 +21,7 @@ import {
     NodeBlockElement,
     Position,
     SelectionRange,
+    TextTraverser,
     applyFormat,
     contains,
     fromHtml,
@@ -775,6 +776,14 @@ export default class Editor {
             range &&
             ContentTraverser.createBlockTraverser(this.core.contentDiv, range, startFrom)
         );
+    }
+
+    /**
+     * Get a text traverser of current selection
+     */
+    public getTextTraverser(): TextTraverser {
+        let range = this.getSelectionRange();
+        return range && new TextTraverser(this.core.contentDiv, new SelectionRange(range).start);
     }
 
     /**

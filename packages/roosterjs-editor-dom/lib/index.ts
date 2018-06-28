@@ -11,6 +11,7 @@ export {
 } from './blockElements/BlockElement';
 
 export { default as ContentTraverser } from './contentTraverser/ContentTraverser';
+export { default as TextTraverser } from './contentTraverser/TextTraverser';
 
 export { getNextLeafSibling, getPreviousLeafSibling } from './domWalker/getLeafSibling';
 export { getFirstLeafNode, getLastLeafNode } from './domWalker/getLeafNode';

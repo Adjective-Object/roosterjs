@@ -42,7 +42,7 @@ export default class TextTraverser {
      * between position and the white space is the word before position
      * @returns The word before position
      */
-    public getWordBeforeCursor(): string {
+    public getWordBeforePosition(): string {
         if (!this.word) {
             this.traverse(() => this.word);
         }
@@ -54,7 +54,7 @@ export default class TextTraverser {
      * Get the inline element before position
      * @returns The inlineElement before position
      */
-    public getInlineElementBeforeCursor(): InlineElement {
+    public getInlineElementBeforePosition(): InlineElement {
         if (!this.inlineBefore) {
             this.traverse(null);
         }
@@ -66,7 +66,7 @@ export default class TextTraverser {
      * Get the inline element after position
      * @returns The inline element after position
      */
-    public get inlineElementAfterCursor(): InlineElement {
+    public getInlineElementAfterPosition(): InlineElement {
         if (!this.inlineAfter) {
             this.inlineAfter = ContentTraverser.createBlockTraverser(this.rootNode, this.position).currentInlineElement;
         }
@@ -82,7 +82,7 @@ export default class TextTraverser {
      * @returns The actual string we get as a sub string, or the whole string before position when
      * there is not enough chars in the string
      */
-    public getSubStringBeforeCursor(length: number): string {
+    public getSubStringBeforePosition(length: number): string {
         if (this.text.length < length) {
             this.traverse(() => this.text.length >= length);
         }
@@ -114,7 +114,8 @@ export default class TextTraverser {
 
                     // on first time when end is matched, set the end of range
                     if (!endPosition) {
-                        endPosition = textInline.getStartPosition().move(nodeIndex + 1);
+                        let point = textInline.getStartPoint();
+                        endPosition = new Position(point.containerNode, point.offset).move(nodeIndex + 1);
                     }
                 } else if (exactMatch || endPosition) {
                     // Mismatch found when exact match or end already match, so return since matching failed
@@ -124,7 +125,8 @@ export default class TextTraverser {
 
             // when textIndex == -1, we have a successful complete match
             if (textIndex == -1) {
-                startPosition = textInline.getStartPosition().move(nodeIndex + 1);
+                let point = textInline.getStartPoint();
+                startPosition = new Position(point.containerNode, point.offset).move(nodeIndex + 1);
                 return true;
             }
 
