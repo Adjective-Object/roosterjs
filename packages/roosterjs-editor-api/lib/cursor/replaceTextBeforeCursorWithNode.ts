@@ -1,7 +1,6 @@
 import CursorData from './CursorData';
 import replaceRangeWithNode from './replaceRangeWithNode';
 import { Editor } from 'roosterjs-editor-core';
-import { SelectionRange } from 'roosterjs-editor-dom/lib';
 
 /**
  * @deprecated Use TextTraverser.getRangeFromText() instead
