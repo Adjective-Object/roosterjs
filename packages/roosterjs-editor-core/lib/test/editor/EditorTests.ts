@@ -427,3 +427,38 @@ describe('Editor contains()', () => {
         expect(containsNode).toBe(false);
     });
 });
+
+describe('Editor getExplicitTextDirection', () => {
+    it('Is \'rtl\' when the dir attribute on the editor is rtl', () => {
+        const editor = TestHelper.initEditor('testEditor', null, null, new Map().set('dir', "rtl"))
+        expect(editor.getExplicitTextDirection()).toEqual('rtl');
+    })
+
+    it('Is \'ltr\' when the dir attribute on the editor is ltr', () => {
+        const editor = TestHelper.initEditor('testEditor', null, null, new Map().set('dir', "ltr"))
+        expect(editor.getExplicitTextDirection()).toEqual('ltr');
+    })
+
+    it('Is \'rtl\' when the css direction on the editor is rtl', () => {
+        const editor = TestHelper.initEditor('testEditor', null, null, new Map().set('style', "direction: rtl"))
+        expect(editor.getExplicitTextDirection()).toEqual('rtl');
+    })
+
+    it('Is \'ltr\' when the css direction on the the editor is ltr', () => {
+        const editor = TestHelper.initEditor('testEditor', null, null, new Map().set('style', "direction: ltr"))
+        expect(editor.getExplicitTextDirection()).toEqual('ltr');
+    })
+
+    it('Is \'rtl\' when the css direction on the editor is rtl and an explicit dir attribute is ltr', () => {
+        const editor = TestHelper.initEditor(
+            'testEditor',
+            null,
+            null,
+            new Map()
+                .set('style', "direction: rtl")
+                .set('dir', "ltr")
+        );
+        expect(editor.getExplicitTextDirection()).toEqual('rtl');
+    })
+
+})

@@ -5,9 +5,15 @@ import UndoService from '../editor/UndoService';
 
 export * from 'roosterjs-editor-dom/lib/test/DomTestHelper';
 
-export function initEditor(id: string, plugins?: EditorPlugin[], undo?: UndoService) {
+export function initEditor(id: string, plugins?: EditorPlugin[], undo?: UndoService, attributes?: Map<string, string>) {
     let node = document.createElement('div');
     node.id = id;
+    if (attributes) {
+        Array.from(attributes.entries()).map(entry =>
+            node.setAttribute(entry[0], entry[1])
+        );
+    }
+
     document.body.insertBefore(node, document.body.childNodes[0]);
 
     let options: EditorOptions = {

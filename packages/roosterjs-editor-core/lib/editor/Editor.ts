@@ -839,6 +839,14 @@ export default class Editor {
         });
     }
 
+    /**
+     * Gets editor directionality marked directly on the editor container element (not inferred from locale).
+     * Returns null if no direction is set
+     */
+    public getExplicitTextDirection() {
+        return getComputedStyle(this.core.contentDiv).direction;
+    }
+
     //#endregion
 
     //#region Private functions
